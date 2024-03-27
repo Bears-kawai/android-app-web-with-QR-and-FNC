@@ -16,19 +16,19 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         }
 
     var inicialUrl: String
-        get() = sharedPreferences.getString("inicial_url", "https://2.139.185.77/") ?: "https://2.139.185.77/"
+        get() = sharedPreferences.getString("inicial_url", "bears-kawai") ?: "bears-kawai"
         set(value) {
             sharedPreferences.edit().putString("inicial_url", value).apply()
         }
 
     var username: String
-        get() = sharedPreferences.getString("username_log", "invitado") ?: "invitado"
+        get() = sharedPreferences.getString("username_log", "bears-kawai") ?: "bears-kawai"
         set(value) {
             sharedPreferences.edit().putString("username_log", value).apply()
         }
 
     var pass: String
-        get() = sharedPreferences.getString("pass_log", "nC1shT5XMO3zd2LVLFIUkOVqvqbzp") ?: "nC1shT5XMO3zd2LVLFIUkOVqvqbzp"
+        get() = sharedPreferences.getString("pass_log", "bears-kawai") ?: "bears-kawai"
         set(value) {
             sharedPreferences.edit().putString("pass_log", value).apply()
         }
