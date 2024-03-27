@@ -1,4 +1,4 @@
-## Android app
+## Android app: web with QR
 
 ## Programmed:
 
