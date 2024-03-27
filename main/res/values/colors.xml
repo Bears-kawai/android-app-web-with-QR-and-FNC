@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="Brand_Petrol">#00395A</color>
+    <color name="Brand_Blue">#24BBEE</color>
+    <color name="Brand_Petrol_Dark">#00243F</color>
+    <color name="Brand_Blue_Text">#009EDC</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>

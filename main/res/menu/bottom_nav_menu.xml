@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:shownIn= "navigation_view">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_home"/>
+
+    <item
+        android:id="@+id/navigation_qr"
+        android:icon="@drawable/qr_code_scanner_fill0_wght400_grad0_opsz24"
+        android:title="@string/title_qr"/>
+
+    <item
+        android:id="@+id/navigation_options"
+        android:title="@string/options"
+        android:visible="false" />
+
+</menu>
