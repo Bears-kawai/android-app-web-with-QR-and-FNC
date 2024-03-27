@@ -35,11 +35,12 @@ The word "bears-kawai" must be changed to the name of the desired       project.
 Also, in the "Grade Scripts" files I have them with this    configuration (it is the current one from when I made the app) which    will have to be purchased with your current one:
 
 	settings.gradle.kts:
-   
+ ![](./media/config/settings.gradle.kts.jpg)
 	build.gradle.kts (:app): 
- 
+ ![](./media/config/build.gradle.kts-1.JPG)
+ ![](./media/config/build.gradle.kts-2.JPG)
 	build.grade.kts (bears-kawai): 
- 		![](./media/config/settings.gradle.kts.jpg)
+![](./media/config/build.grade.kts (bears-kawai).JPG)
  
 Import the image that is used as a logo using Android Studio, since this creates all the versions you need.
 
