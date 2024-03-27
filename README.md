@@ -39,7 +39,7 @@ Also, in the "Grade Scripts" files I have them with this    configuration (it is
 	build.gradle.kts (:app): 
  
 	build.grade.kts (bears-kawai): 
- 		![img-build.grade.kts (bears-kawai)](images conf/settings.gradle.kts.jpg)
+ 		![img-build.grade.kts (bears-kawai)](./images conf/settings.gradle.kts.jpg)
  
 Import the image that is used as a logo using Android Studio, since this creates all the versions you need.
 
