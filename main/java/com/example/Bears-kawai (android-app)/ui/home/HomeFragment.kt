@@ -104,5 +104,11 @@ class HomeFragment : Fragment() {
     private fun isOnHomePage(url: String?): Boolean {
         return url == homeViewModel.inicialUrl
     }
+
+    fun loadUrl(urlFromNFC: String?) {
+        if (!urlFromNFC.isNullOrEmpty()) {
+            webView.loadUrl(urlFromNFC)
+        }
+    }
 }
 
