@@ -1,5 +1,8 @@
 package com.example.Bears-kawai
 
+import android.content.Intent
+import android.nfc.NdefMessage
+import android.nfc.NfcAdapter
 import android.os.Build
 import android.os.Bundle
 import android.os.Debug
@@ -12,8 +15,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.Bears-kawai.databinding.ActivityMainBinding
-import com.example.Bears-kawai.ui.home.HomeViewModel
+import com.example.amcor.databinding.ActivityMainBinding
+import com.example.amcor.ui.home.HomeFragment
+import com.example.amcor.ui.home.HomeViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.scottyab.rootbeer.RootBeer
 import java.net.MalformedURLException
