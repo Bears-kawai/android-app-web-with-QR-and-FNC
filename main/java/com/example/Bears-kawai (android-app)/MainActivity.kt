@@ -133,33 +133,4 @@ class MainActivity : AppCompatActivity() {
         }
         return false
     }
-
-    override fun onNewIntent(intent: Intent) {
-        super.onNewIntent(intent)
-        if (intent.action == NfcAdapter.ACTION_NDEF_DISCOVERED) {
-            val rawMessages = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)
-            if (rawMessages != null) {
-                for (message in rawMessages) {
-                    val records = (message as NdefMessage).records
-                    for (record in records) {
-                        val payload = record.payload
-                        if (payload != null) {
-                            val payloadStr = String(payload)
-                            if (payloadStr.startsWith("URL:")) {
-                                // Si el registro comienza con "URL:", extrae la URL y actualiza el WebView en HomeFragment
-                                val urlFromNFC = payloadStr.substringAfter("URL:")
-                                if(urlFromNFC?.let { analizarURL(it) } == true) {
-                                    // Actualizar la URL del WebView en el HomeFragment
-                                    val homeFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as? HomeFragment
-                                    homeFragment?.loadUrl(urlFromNFC)
-                                } else {
-                                    Log.e("Error url: ", urlFromNFC)
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
 }
