@@ -105,10 +105,8 @@ class HomeFragment : Fragment() {
         return url == homeViewModel.inicialUrl
     }
 
-    fun loadUrl(urlFromNFC: String?) {
-        if (!urlFromNFC.isNullOrEmpty()) {
-            webView.loadUrl(urlFromNFC)
-        }
+    fun updateWebView(newUrlNfc: String) {
+        webView.loadUrl(newUrlNfc)
     }
 }
 
