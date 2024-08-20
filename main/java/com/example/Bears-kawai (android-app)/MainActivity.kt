@@ -1,4 +1,4 @@
-package com.example.Bears-kawai
+package com.example.amcor
 
 import android.content.Intent
 import android.nfc.NdefMessage
@@ -7,7 +7,6 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Debug
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -22,11 +21,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.scottyab.rootbeer.RootBeer
 import java.net.MalformedURLException
 import java.net.URL
+import java.nio.charset.Charset
+
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     val homeViewModel: HomeViewModel by viewModels()
+
+    private lateinit var nfcAdapter: NfcAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // Adapta el contenido pantalla completa sin bordes
@@ -41,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val rootBeer = RootBeer(this)
-
+/*
         if (rootBeer.isRooted) {
             // La aplicación se está ejecutando en un dispositivo rooteado
             Toast.makeText(this, "La aplicación no puede ejecutarse en un dispositivo rooteado.", Toast.LENGTH_SHORT).show()
@@ -50,7 +53,9 @@ class MainActivity : AppCompatActivity() {
             // La aplicación se está ejecutando en un emulador, realiza las acciones correspondientes
             Toast.makeText(this, "La aplicación no puede ejecutarse en un emulador.", Toast.LENGTH_SHORT).show()
             finish()
-        } else {
+        } else {*/
+            nfcAdapter = NfcAdapter.getDefaultAdapter(this)
+
             val navView: BottomNavigationView = binding.navView
 
             val navController = findNavController(R.id.nav_host_fragment_activity_main)
@@ -64,7 +69,9 @@ class MainActivity : AppCompatActivity() {
 
             setupActionBarWithNavController(navController, appBarConfiguration)
             navView.setupWithNavController(navController)
-        }
+
+            handleIntent(intent)
+        // }
     }
 
     // Cambia de fragmento home
@@ -132,5 +139,56 @@ class MainActivity : AppCompatActivity() {
             e.printStackTrace()
         }
         return false
+    }
+
+    override fun onResume() {
+        super.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        handleIntent(intent)
+    }
+
+    private fun handleIntent(intent: Intent?) {
+        intent?.let {
+            val action = intent.action
+            if (NfcAdapter.ACTION_NDEF_DISCOVERED == action) {
+                val parcelables = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)
+                if (!parcelables.isNullOrEmpty()) {
+                    val message = parcelables[0] as NdefMessage
+                    val records = message.records
+                    if (records.isNotEmpty()) {
+                        val record = records[0]
+                        val payload = record.payload
+                        val text = String(payload, Charset.forName("UTF-8")).trim()
+                        val startIndex  = text.indexOf(homeViewModel.inicialUrl)
+                        val newUrlNfc = text.substring(startIndex)
+
+                        if (analizarURL(newUrlNfc)) {
+                            homeViewModel.currentUrl = newUrlNfc
+
+                            // Reemplaza el fragmento actual con una nueva instancia de HomeFragment
+                            val fragmentManager = supportFragmentManager
+                            val homeFragment = HomeFragment()
+
+                            // Reemplaza el fragmento y asegura que la transacción esté completa
+                            fragmentManager.beginTransaction()
+                                .replace(R.id.nav_host_fragment_activity_main, homeFragment)
+                                .commit()
+                            fragmentManager.executePendingTransactions()
+
+                            // Llama directamente al método updateWebView en el fragmento recién añadido
+                            (fragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as? HomeFragment)?.updateWebView(newUrlNfc)
+                            switchToHomeOption()
+                        }
+                    }
+                }
+            }
+        }
     }
 }
