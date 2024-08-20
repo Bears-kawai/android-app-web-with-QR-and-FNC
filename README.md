@@ -11,6 +11,8 @@
    options.
  - Allows you to read QR codes that load only URLs of the page that has
    been specified.
+ - Allows you to read NFC tags that load only URLs of the page that has
+   been specified.
  - In options you can change the default url and if it is accessed
    through a simple "authbasic" form you can set it to send the
    credentials automatically.
